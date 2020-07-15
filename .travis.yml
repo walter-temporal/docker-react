@@ -8,3 +8,16 @@ before_install:
 
 script:
   - docker run -e CI=true waltertemporal/docker-react npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: "sa-east-1"
+  app: docker
+  env: "Docker-env"
+  bucket_name: "elasticbeanstalk-sa-east-1-039259315358"
+  buckt_path: "docker"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
